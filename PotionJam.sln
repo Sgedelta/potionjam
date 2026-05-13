@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotionJam", "PotionJam.csproj", "{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotionJam", "PotionJam.csproj", "{3EFE993F-E8B5-4D09-AA32-3A574C404B85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{0D48D0F2-06B5-4DFA-8AB2-CDF9687C0BAC}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{3EFE993F-E8B5-4D09-AA32-3A574C404B85}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
