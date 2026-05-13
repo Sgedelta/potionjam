@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dkjng5ooa1rsh"]
+
+[ext_resource type="PackedScene" uid="uid://ddx01vixwd17l" path="res://Scenes/character.tscn" id="1_skmq4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bwha0"]
+size = Vector3(10, 1, 10)
+
+[node name="TestWorld" type="Node3D" unique_id=2104044446]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=907405375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2276664, 0)
+mesh = SubResource("BoxMesh_bwha0")
+
+[node name="Character" parent="." unique_id=406720183 instance=ExtResource("1_skmq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8017162, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1752568330]
+transform = Transform3D(1, 0, 0, 0, 0.8603064, 0.5097773, 0, -0.5097773, 0.8603064, 0, 0, 0)

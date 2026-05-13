@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ddx01vixwd17l"]
+
+[ext_resource type="Texture2D" uid="uid://bgq7kpv4qxc0w" path="res://Resources/Sprites/TEMP/PaperMario.png" id="1_lkv7d"]
+[ext_resource type="PackedScene" uid="uid://ciqk568b1xmu3" path="res://Scenes/main_camera.tscn" id="1_ushfy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ushfy"]
+radius = 0.65
+
+[node name="Character" type="CharacterBody3D" unique_id=406720183]
+
+[node name="MainCamera" parent="." unique_id=1614053421 instance=ExtResource("1_ushfy")]
+transform = Transform3D(1, 0, 0, 0, 0.9123061, 0.4095091, 0, -0.4095091, 0.9123061, 0, 3.6785996, 7.1754327)
+
+[node name="Display" type="Sprite3D" parent="." unique_id=693484397]
+pixel_size = 0.001
+texture = ExtResource("1_lkv7d")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1126218737]
+shape = SubResource("CapsuleShape3D_ushfy")

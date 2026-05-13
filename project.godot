@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="PotionJam"
+run/main_scene="uid://115n81wt01gq"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://csyh1t8xwlri4"
+
+[dotnet]
+
+project/assembly_name="PotionJam"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
