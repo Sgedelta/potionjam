@@ -1,12 +1,22 @@
 # Godot 4+ specific ignores
 .godot/
 .nomedia
+/android/
+
+# Build Ignores
+/[Bb]uilds/
+/[Bb]uild/
 
 # Godot-specific ignores
 .import/
 export.cfg
 export_credentials.cfg
-*.tmp
+
+# C sharp:
+nupkg/
+bin/
+obj/
+.generated/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -15,3 +25,18 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+#VS
+*.csproj.user
+#added because some build up and its annoying
+*.csproj.old 
+Properties/
+
+# VSCode:
+.vs/
+
+# Mac OS:
+.DS_Store
+
+# Blender:
+*.blend1
