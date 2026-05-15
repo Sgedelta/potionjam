@@ -25,7 +25,7 @@ project/assembly_name="PotionJam"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg")
 
 [physics]
 
