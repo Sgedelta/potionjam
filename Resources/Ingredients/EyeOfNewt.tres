@@ -1,12 +1,21 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://7lka44tvg884"]
 
 [ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Ingredients/Ingredient.cs" id="1_1eu8q"]
+[ext_resource type="Texture2D" uid="uid://bgq7kpv4qxc0w" path="res://Resources/Sprites/TEMP/PaperMario.png" id="1_xdije"]
+[ext_resource type="Texture2D" uid="uid://ki55t873ma7c" path="res://icon.svg" id="2_yx042"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o26oc"]
+atlas = ExtResource("1_xdije")
+region = Rect2(565.1272, 94.66794, 262.42847, 320.25143)
 
 [resource]
 script = ExtResource("1_1eu8q")
 BaseStateChange = Dictionary[int, float]({
 1: 10.0
 })
+BaseSprite = ExtResource("1_xdije")
 ModType = 1
 ModStrength = 10.0
+ModSprite = SubResource("AtlasTexture_o26oc")
+MetaModSprite = ExtResource("2_yx042")
 metadata/_custom_type_script = "uid://dl3eyc3dyxf08"

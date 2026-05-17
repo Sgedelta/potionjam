@@ -5,24 +5,27 @@ using System;
 [GlobalClass]
 public partial class Ingredient : Resource
 {
-    //A resource represents the "mathematical" change that can get slotted into 
+	//A resource represents the "mathematical" change that can get slotted into 
 
-    [ExportGroup("Always")] //these are always used
-    [Export] public Dictionary<PotionStats, float> AlwaysStatChange = new Dictionary<PotionStats, float>();
+	[ExportGroup("Always")] //these are always used
+	[Export] public Dictionary<PotionStats, float> AlwaysStatChange = new Dictionary<PotionStats, float>();
 
-    [ExportGroup("As Base")] //these are only used when you have a base
-    [Export] public Dictionary<PotionStats, float> BaseStateChange = new Dictionary<PotionStats, float>();
-    //I don't think we need anything else here...
+	[ExportGroup("As Base")] //these are only used when you have a base
+	[Export] public Dictionary<PotionStats, float> BaseStateChange = new Dictionary<PotionStats, float>();
+	[Export] public Texture2D BaseSprite;
+	//I don't think we need anything else here...
 
-    [ExportGroup("As Modifier")] //these are only used when you use it as a modifier - not gonna deal with something that modifies in multiple ways rn (-S)
-    [Export] public ModifierType ModType;
-    [Export] public float ModStrength;
-    [Export] public int ModStepsModifier = -1; //-1 applies to all previous steps, other values only apply to the X previous valid steps
+	[ExportGroup("As Modifier")] //these are only used when you use it as a modifier - not gonna deal with something that modifies in multiple ways rn (-S)
+	[Export] public ModifierType ModType;
+	[Export] public float ModStrength;
+	[Export] public int ModStepsModifier = -1; //-1 applies to all previous steps, other values only apply to the X previous valid steps
+	[Export] public Texture2D ModSprite;
 
-    [ExportGroup("As MetaMod")]
-    [Export] public ModifierType MetaModType;
-    [Export] public float MetaModStrength;
-    [Export] public int MetaStepsModifier = -1; //-1 aapplies to all previous steps, other values only apply to the X previous valid steps
+	[ExportGroup("As MetaMod")]
+	[Export] public ModifierType MetaModType;
+	[Export] public float MetaModStrength;
+	[Export] public int MetaStepsModifier = -1; //-1 aapplies to all previous steps, other values only apply to the X previous valid steps
+	[Export] public Texture2D MetaModSprite;
 
 }
 
@@ -32,11 +35,11 @@ public partial class Ingredient : Resource
 /// </summary>
 public enum PotionStats
 {
-    Flavor,
-    Vision,
-    Vitality,
-    Energy,
-    Charm
+	Flavor,
+	Vision,
+	Vitality,
+	Energy,
+	Charm
 }
 
 /// <summary>
@@ -44,9 +47,9 @@ public enum PotionStats
 /// </summary>
 public enum ModifierType
 {
-    NONE, //ingredient does nothing as this type of mod
-    Clarity, //changes the clarity of the bases that it effects
-    Linear, //changes the value directly
-    Scalar, //multiplies the value by this amount
-    Percentile, //changes the value by a % increase or decrease - equates to multiplying by (1 + X/100)
+	NONE, //ingredient does nothing as this type of mod
+	Clarity, //changes the clarity of the bases that it effects
+	Linear, //changes the value directly
+	Scalar, //multiplies the value by this amount
+	Percentile, //changes the value by a % increase or decrease - equates to multiplying by (1 + X/100)
 }

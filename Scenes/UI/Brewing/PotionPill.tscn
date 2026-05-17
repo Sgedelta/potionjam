@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://clipumaq8bj3r"]
+
+[ext_resource type="Texture2D" uid="uid://bgq7kpv4qxc0w" path="res://Resources/Sprites/TEMP/PaperMario.png" id="1_qn3pb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn3pb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.16844726, 0.00013416447, 0.23416537, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtub2"]
+atlas = ExtResource("1_qn3pb")
+region = Rect2(17.663818, 1146.037, 413.65796, 444.7937)
+
+[node name="PotionPill" type="Panel" unique_id=803892637]
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1003082651]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qn3pb")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=11673841]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_gtub2")
+expand_mode = 1
+stretch_mode = 5
