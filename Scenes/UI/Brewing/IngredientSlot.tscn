@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://is6u2xvq6d87"]
+
+[ext_resource type="Script" uid="uid://ddaj3dxhu4gfd" path="res://Scenes/UI/Brewing/IngredientSlot.cs" id="1_u3ebb"]
+
+[node name="IngredientSlot" type="Panel" unique_id=1581305987]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u3ebb")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1499773217]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="." unique_id=1841989378]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="StageLabel" type="Label" parent="." unique_id=937650165]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0

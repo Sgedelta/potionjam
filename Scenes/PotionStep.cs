@@ -3,8 +3,8 @@ using System;
 
 public partial class PotionStep : RefCounted //NOT a node!
 {
-    [Export] public Ingredient Type;
-    public IngredientStage Stage = IngredientStage.BASE;
+	[Export] public Ingredient Type;
+	public IngredientStage Stage = IngredientStage.BASE;
 
 
 }
@@ -12,7 +12,7 @@ public partial class PotionStep : RefCounted //NOT a node!
 
 public enum IngredientStage
 {
-    BASE,
-    MODIFIER,
-    METAMODIFIER
+	BASE,
+	MODIFIER,
+	METAMODIFIER
 }
