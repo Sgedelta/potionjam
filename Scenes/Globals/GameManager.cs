@@ -9,7 +9,7 @@ public partial class GameManager : Node
 
     public override void _EnterTree()
     {
-        if(!IsInstanceValid(GameManager._instance))
+        if(!IsInstanceValid(_instance))
 		{
 			//other instance does not exist or has been deleted
 			_instance = this;
