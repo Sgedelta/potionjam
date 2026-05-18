@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://2324gxus8njl"]
+
+[node name="Brewing_Layout_Testing" type="MarginContainer" unique_id=1778271504]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=877112571]
+layout_mode = 2
