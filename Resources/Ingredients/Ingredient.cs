@@ -11,18 +11,24 @@ public partial class Ingredient : Resource
 	[Export] public Dictionary<PotionStats, float> AlwaysStatChange = new Dictionary<PotionStats, float>();
 
 	[ExportGroup("As Base")] //these are only used when you have a base
-	[Export] public Dictionary<PotionStats, float> BaseStateChange = new Dictionary<PotionStats, float>();
+	[Export(PropertyHint.GroupEnable, "")] public bool BaseValid = true;
+	[Export] public float BaseFlavor = 0;
+    [Export] public Dictionary<PotionStats, float> BaseStateChange = new Dictionary<PotionStats, float>();
 	[Export] public Texture2D BaseSprite;
-	//I don't think we need anything else here...
+	
 
 	[ExportGroup("As Modifier")] //these are only used when you use it as a modifier - not gonna deal with something that modifies in multiple ways rn (-S)
-	[Export] public ModifierType ModType;
+    [Export(PropertyHint.GroupEnable, "")] public bool ModValid = true;
+    [Export] public float ModFlavor = 0;
+    [Export] public ModifierType ModType;
 	[Export] public float ModStrength;
 	[Export] public int ModStepsModifier = -1; //-1 applies to all previous steps, other values only apply to the X previous valid steps
 	[Export] public Texture2D ModSprite;
 
 	[ExportGroup("As MetaMod")]
-	[Export] public ModifierType MetaModType;
+    [Export(PropertyHint.GroupEnable, "")] public bool MetaValid = true;
+    [Export] public float MetaFlavor = 0;
+    [Export] public ModifierType MetaModType;
 	[Export] public float MetaModStrength;
 	[Export] public int MetaStepsModifier = -1; //-1 aapplies to all previous steps, other values only apply to the X previous valid steps
 	[Export] public Texture2D MetaModSprite;

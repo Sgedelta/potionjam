@@ -9,13 +9,19 @@ public partial class Potion : Node3D
 		VALID,
 		NOT_ENOUGH_INGREDIENTS,
 		NO_FIRST_BASE,
-		TOO_MANY_INGREDIENTS
+		TOO_MANY_INGREDIENTS,
+		INVALID_BASE,
+		INVALID_MOD,
+		INVALID_META
 	}
 
-	public Array<PotionStep> Steps = new Array<PotionStep>();
+	private Array<PotionStep> _steps = new Array<PotionStep>();
 	private bool _isDirty = true;
 	public PotionValidity Validity;
 	private Dictionary<PotionStats, StatUnit> _lastPotionVals;
+	//flavor is only updated when potion vals is updated!
+	private float _flavor = 0;
+	public float Flavor { get { return _flavor; } }
 
 	public Dictionary<PotionStats, StatUnit> GetPotionValues()
 	{
@@ -36,12 +42,12 @@ public partial class Potion : Node3D
 		}
 
 		//check basic validity
-		if(Steps.Count <= 0)
+		if(_steps.Count <= 0)
 		{
 			Validity = PotionValidity.NOT_ENOUGH_INGREDIENTS;
 			return _lastPotionVals;
 		} 
-		else if (Steps[0].Stage != IngredientStage.BASE) {
+		else if (_steps[0].Stage != IngredientStage.BASE) {
 			Validity = PotionValidity.NO_FIRST_BASE;
 			return _lastPotionVals;
 		}
@@ -51,24 +57,37 @@ public partial class Potion : Node3D
 		{
 			_lastPotionVals.Add(stat, new StatUnit(stat));
 		}
+		_flavor = 0;
 
 		//System.Collections.Generic.List<Tuple<float, int, int>> ActiveModifiers = new();
 		Array<ModifierUnit> activeMods = new Array<ModifierUnit>();
 		Array<ModifierUnit> activeMetaMods = new Array<ModifierUnit>();
 
 		//loop through all steps, applying from the most recent to the oldest. this is so modifiers apply properly
-		for(int i = Steps.Count-1; i >= 0; i--)
+		for(int i = _steps.Count-1; i >= 0; i--)
 		{
-			PotionStep step = Steps[i];
+			PotionStep step = _steps[i];
 			float val = 0; //used in many cases
 			float clarityChange = 0;
 
 			switch(step.Stage)
 			{
 				case IngredientStage.BASE:
+
+					if(!step.Type.BaseValid)
+					{
+						Validity = PotionValidity.INVALID_BASE;
+						return _lastPotionVals;
+					}
+
+					//update flavor
+					_flavor += step.Type.BaseFlavor;
+
 					//base ingredients are the simplest. Modify the stats by a given amount, taking into account any active modifiers
 					foreach(PotionStats stat in step.Type.BaseStateChange.Keys)
 					{
+						
+
 						//get base
 						val = step.Type.BaseStateChange[stat];
 
@@ -95,8 +114,18 @@ public partial class Potion : Node3D
 					}
 					break;
 				case IngredientStage.MODIFIER:
-					//create a new modifier
-					ModifierUnit newMod = new ModifierUnit(step.Type.ModType);
+
+                    if (!step.Type.ModValid)
+                    {
+                        Validity = PotionValidity.INVALID_MOD;
+                        return _lastPotionVals;
+                    }
+
+                    //update flavor
+                    _flavor += step.Type.ModFlavor;
+
+                    //create a new modifier
+                    ModifierUnit newMod = new ModifierUnit(step.Type.ModType);
 					newMod.Strength = step.Type.ModStrength;
 
 					//modify the modifier
@@ -110,8 +139,18 @@ public partial class Potion : Node3D
 
 					break;
 				case IngredientStage.METAMODIFIER:
-					//make a new metamod
-					ModifierUnit newMeta = new ModifierUnit(step.Type.MetaModType);
+
+                    if (!step.Type.MetaValid)
+                    {
+                        Validity = PotionValidity.INVALID_META;
+                        return _lastPotionVals;
+                    }
+
+                    //update flavor
+                    _flavor += step.Type.MetaFlavor;
+
+                    //make a new metamod
+                    ModifierUnit newMeta = new ModifierUnit(step.Type.MetaModType);
 					newMeta.Strength = step.Type.MetaModStrength;
 
 					//add
@@ -125,6 +164,7 @@ public partial class Potion : Node3D
 
 		//potion is valid and stats are done!
 		Validity = PotionValidity.VALID;
+		_isDirty = false;
 		return _lastPotionVals;
 
 	}
@@ -154,6 +194,24 @@ public partial class Potion : Node3D
 		}
 
 		return val;
+	}
+
+
+	public void AddStep(PotionStep newStep)
+	{
+		_steps.Add(newStep);
+		_isDirty = true;
+	}
+
+	public void FlushPotion()
+	{
+		_steps.Clear();
+		_isDirty = true;
+	}
+
+	public int GetStepCount()
+	{
+		return _steps.Count;
 	}
 
 }

@@ -43,7 +43,7 @@ public partial class Brewing : Control
 		_backpack.HideIngredient(ingredient); //not sure if we want this?
 
 		var step = new PotionStep { Type = ingredient, Stage = stage };
-		_currentPotion.Steps.Add(step);
+		_currentPotion.AddStep(step);
 
 		UpdateHoverLabel();
 		RefreshConfirmButton();
@@ -51,10 +51,9 @@ public partial class Brewing : Control
 
 	private void OnCauldronFlushed()
 	{
-		foreach (var step in _currentPotion.Steps)
-			_backpack.ShowIngredient(step.Type, IngredientStage.BASE); //brings back all ingreds
+		//because ingredients are unlimited, we no longer need to bring ingredients back to the backpack
 
-		_currentPotion.Steps.Clear();
+		_currentPotion.FlushPotion();
 		UpdateHoverLabel();
 		RefreshConfirmButton();
 	}
@@ -83,7 +82,7 @@ public partial class Brewing : Control
 
 		_potionBar.AddPotion();
 
-		_currentPotion.Steps.Clear();
+		_currentPotion.FlushPotion();
 		_cauldron.ClearSilent();
 
 		foreach (var ingredient in AllIngredients)
@@ -97,7 +96,7 @@ public partial class Brewing : Control
 	{
 		var vals = _currentPotion.GetPotionValues();
 
-		if (vals == null || vals.Count == 0 || _currentPotion.Steps.Count == 0)
+		if (vals == null || vals.Count == 0 || _currentPotion.GetStepCount() == 0)
 		{
 			_cauldron.SetHoverText("Cauldron is empty");
 			return;
