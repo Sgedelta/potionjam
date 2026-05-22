@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://w4qbhy0jfl7x"
+path="res://.godot/imported/TestDialogue.yarn-259dad26866b23c6d9155ce61795a1c0.tres"
+
+[deps]
+
+source_file="res://Resources/Dialogue/TestDialogue.yarn"
+dest_files=["res://.godot/imported/TestDialogue.yarn-259dad26866b23c6d9155ce61795a1c0.tres"]
+
+[params]
+

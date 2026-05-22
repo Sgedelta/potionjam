@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dkjng5ooa1rsh"]
 
 [ext_resource type="PackedScene" uid="uid://ddx01vixwd17l" path="res://Scenes/character.tscn" id="1_skmq4"]
+[ext_resource type="PackedScene" uid="uid://bv42g323prh5f" path="res://addons/YarnSpinner-Godot/Scenes/DefaultDialogueSystem.tscn" id="2_au00k"]
+[ext_resource type="Resource" uid="uid://ctbbgnyto6ycd" path="res://Resources/Dialogue/Dialogue.yarnproject" id="3_707cn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bwha0"]
 size = Vector3(10, 1, 10)
@@ -33,3 +35,12 @@ mesh = SubResource("BoxMesh_bwha0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2" unique_id=761985152]
 shape = SubResource("BoxShape3D_skmq4")
+
+[node name="YarnSpinnerCanvasLayer" parent="." unique_id=464658124 instance=ExtResource("2_au00k")]
+
+[node name="DialogueRunner" parent="YarnSpinnerCanvasLayer" index="0"]
+yarnProject = ExtResource("3_707cn")
+autoStart = true
+startNode = "TestDialogue"
+
+[editable path="YarnSpinnerCanvasLayer"]

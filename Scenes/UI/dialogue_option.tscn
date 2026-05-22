@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cke1o30c8hixf"]
+
+[ext_resource type="Script" uid="uid://e8endtpbxsql" path="res://addons/YarnSpinner-Godot/Runtime/Async/OptionItem.cs" id="1_xtv51"]
+
+[node name="OptionPanelContainer" type="PanelContainer" unique_id=2134942295 node_paths=PackedStringArray("text", "button")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_xtv51")
+text = NodePath("RichTextLabel")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="." unique_id=1127961051]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1036632210]
+layout_mode = 2
+mouse_filter = 2
+fit_content = true
