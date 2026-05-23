@@ -22,7 +22,7 @@ public partial class Potion : Node3D
 	public PotionValidity Validity { get { 
         if(_isDirty)
             {
-                RecalculationPotion();
+                RecalculatePotion();
             }
         return _validity;
         }  
@@ -40,14 +40,14 @@ public partial class Potion : Node3D
             return _lastPotionVals;
         }
 
-        RecalculationPotion();
+        RecalculatePotion();
 
         return _lastPotionVals;
 
 	}
 
 
-	public void RecalculationPotion(bool force = false)
+	public void RecalculatePotion(bool force = false)
 	{
         //check dirty and basic validity
         if(!force)
@@ -69,12 +69,12 @@ public partial class Potion : Node3D
             }
 
             //check basic validity
-            if (Steps.Count <= 0)
+            if (_steps.Count <= 0)
             {
                 _validity = PotionValidity.NOT_ENOUGH_INGREDIENTS;
                 return;
             }
-            else if (Steps[0].Stage != IngredientStage.BASE)
+            else if (_steps[0].Stage != IngredientStage.BASE)
             {
                 _validity = PotionValidity.NO_FIRST_BASE;
                 return;
@@ -104,8 +104,8 @@ public partial class Potion : Node3D
 
 					if(!step.Type.BaseValid)
 					{
-						Validity = PotionValidity.INVALID_BASE;
-						return _lastPotionVals;
+						_validity = PotionValidity.INVALID_BASE;
+						return;
 					}
 
 					//update flavor
@@ -145,8 +145,8 @@ public partial class Potion : Node3D
 
                     if (!step.Type.ModValid)
                     {
-                        Validity = PotionValidity.INVALID_MOD;
-                        return _lastPotionVals;
+                        _validity = PotionValidity.INVALID_MOD;
+                        return;
                     }
 
                     //update flavor
@@ -170,8 +170,8 @@ public partial class Potion : Node3D
 
                     if (!step.Type.MetaValid)
                     {
-                        Validity = PotionValidity.INVALID_META;
-                        return _lastPotionVals;
+                        _validity = PotionValidity.INVALID_META;
+                        return;
                     }
 
                     //update flavor
@@ -191,9 +191,9 @@ public partial class Potion : Node3D
         }
 
 		//potion is valid and stats are done!
-		Validity = PotionValidity.VALID;
+		_validity = PotionValidity.VALID;
 		_isDirty = false;
-		return _lastPotionVals;
+		return;
 
 	}
 
