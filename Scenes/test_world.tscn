@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dkjng5ooa1rsh"]
 
 [ext_resource type="PackedScene" uid="uid://ddx01vixwd17l" path="res://Scenes/character.tscn" id="1_skmq4"]
+[ext_resource type="PackedScene" uid="uid://ciqk568b1xmu3" path="res://Scenes/main_camera.tscn" id="2_au00k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bwha0"]
 size = Vector3(10, 1, 10)
@@ -33,3 +34,10 @@ mesh = SubResource("BoxMesh_bwha0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2" unique_id=761985152]
 shape = SubResource("BoxShape3D_skmq4")
+
+[node name="MainCamera" parent="." unique_id=1614053421 node_paths=PackedStringArray("TargetNode") instance=ExtResource("2_au00k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8160081, 0.6817508, 0.14117241)
+TargetNode = NodePath("../Character")
+FreezeMovement = 2
+
+[editable path="MainCamera"]

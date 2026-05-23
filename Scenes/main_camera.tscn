@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://ciqk568b1xmu3"]
 
-[node name="MainCamera" type="Camera3D" unique_id=1614053421]
+[ext_resource type="Script" uid="uid://dssi3s83kmgyp" path="res://Scenes/CameraController.cs" id="1_hn7o2"]
+
+[node name="CameraBase" type="Node3D" unique_id=1744745217]
+script = ExtResource("1_hn7o2")
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1614053421]
+transform = Transform3D(1, 7.105428e-15, -1.7484555e-07, 9.13045e-08, 0.85282254, 0.52220094, 1.4911222e-07, -0.52220094, 0.85282254, 0, 4.5294895, 7.487986)
