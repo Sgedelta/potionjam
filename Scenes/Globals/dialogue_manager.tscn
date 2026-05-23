@@ -17,8 +17,6 @@ script = ExtResource("2_01bdl")
 yarnProject = ExtResource("3_k3qtx")
 lineProvider = NodePath("../TextLineProvider")
 dialoguePresenters = [NodePath("../DialogueCanvasLayer/LinePresenter"), NodePath("../DialogueCanvasLayer/OptionsPresenter")]
-autoStart = true
-startNode = "TestDialogue"
 metadata/_custom_type_script = "uid://budnld4qd513n"
 
 [node name="DialogueCanvasLayer" type="CanvasLayer" parent="." unique_id=319036180]
@@ -60,21 +58,13 @@ layout_mode = 2
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="ContinueButton" type="Button" parent="DialogueCanvasLayer/LinePresenter/PresenterControl" unique_id=1828271962]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ContinueButton" type="Button" parent="DialogueCanvasLayer/LinePresenter/PresenterControl/VBoxContainer" unique_id=1828271962]
+layout_mode = 2
 text = "Continue"
 
 [node name="LinePresenterButtonHandler" type="Node" parent="DialogueCanvasLayer/LinePresenter" unique_id=926192257 node_paths=PackedStringArray("continueButton", "dialogueRunner")]
 script = ExtResource("5_w3uf8")
-continueButton = NodePath("../PresenterControl/ContinueButton")
+continueButton = NodePath("../PresenterControl/VBoxContainer/ContinueButton")
 dialogueRunner = NodePath("../../../DialogueRunner")
 
 [node name="OptionsPresenter" type="Node" parent="DialogueCanvasLayer" unique_id=516447217 node_paths=PackedStringArray("presenterControl", "lastLineText", "lastLineContainer", "lastLineCharacterNameText", "lastLineCharacterNameContainer", "optionParent")]

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using YarnSpinnerGodot;
 
 public partial class DialogueManager : Node
 {
@@ -18,5 +19,9 @@ public partial class DialogueManager : Node
 		{
 			Free();
 		}
+	}
+	
+	public DialogueRunner GetDialogueRunner() {
+		return GetNode<DialogueRunner>("DialogueRunner");
 	}
 }
