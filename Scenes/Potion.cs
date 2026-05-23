@@ -17,7 +17,16 @@ public partial class Potion : Node3D
 
 	private Array<PotionStep> _steps = new Array<PotionStep>();
 	private bool _isDirty = true;
-	public PotionValidity Validity;
+
+    private PotionValidity _validity;
+	public PotionValidity Validity { get { 
+        if(_isDirty)
+            {
+                RecalculationPotion();
+            }
+        return _validity;
+        }  
+    }
 	private Dictionary<PotionStats, StatUnit> _lastPotionVals;
 	//flavor is only updated when potion vals is updated!
 	private float _flavor = 0;
@@ -25,32 +34,52 @@ public partial class Potion : Node3D
 
 	public Dictionary<PotionStats, StatUnit> GetPotionValues()
 	{
-		//return old info if nothing has changed
-		if(!_isDirty)
-		{
-			return _lastPotionVals;
-		}
+        //return old info if nothing has changed
+        if (!_isDirty)
+        {
+            return _lastPotionVals;
+        }
 
-		//otherwise we need to construct a new one
-		if(_lastPotionVals == null)
-		{
-			_lastPotionVals = new Dictionary<PotionStats, StatUnit>();
-		} 
-		else
-		{
-			_lastPotionVals.Clear();
-		}
+        RecalculationPotion();
 
-		//check basic validity
-		if(_steps.Count <= 0)
-		{
-			Validity = PotionValidity.NOT_ENOUGH_INGREDIENTS;
-			return _lastPotionVals;
-		} 
-		else if (_steps[0].Stage != IngredientStage.BASE) {
-			Validity = PotionValidity.NO_FIRST_BASE;
-			return _lastPotionVals;
-		}
+        return _lastPotionVals;
+
+	}
+
+
+	public void RecalculationPotion(bool force = false)
+	{
+        //check dirty and basic validity
+        if(!force)
+        {
+            //return old info if nothing has changed
+            if (!_isDirty)
+            {
+                return;
+            }
+
+            //otherwise we need to construct a new one
+            if (_lastPotionVals == null)
+            {
+                _lastPotionVals = new Dictionary<PotionStats, StatUnit>();
+            }
+            else
+            {
+                _lastPotionVals.Clear();
+            }
+
+            //check basic validity
+            if (Steps.Count <= 0)
+            {
+                _validity = PotionValidity.NOT_ENOUGH_INGREDIENTS;
+                return;
+            }
+            else if (Steps[0].Stage != IngredientStage.BASE)
+            {
+                _validity = PotionValidity.NO_FIRST_BASE;
+                return;
+            }
+        }
 
 		//fill in with a bunch of empty data
 		foreach(PotionStats stat in Enum.GetValues(typeof(PotionStats)))
@@ -59,9 +88,8 @@ public partial class Potion : Node3D
 		}
 		_flavor = 0;
 
-		//System.Collections.Generic.List<Tuple<float, int, int>> ActiveModifiers = new();
-		Array<ModifierUnit> activeMods = new Array<ModifierUnit>();
-		Array<ModifierUnit> activeMetaMods = new Array<ModifierUnit>();
+        Array<ModifierUnit> activeMods = new Array<ModifierUnit>();
+        Array<ModifierUnit> activeMetaMods = new Array<ModifierUnit>();
 
 		//loop through all steps, applying from the most recent to the oldest. this is so modifiers apply properly
 		for(int i = _steps.Count-1; i >= 0; i--)
@@ -91,15 +119,15 @@ public partial class Potion : Node3D
 						//get base
 						val = step.Type.BaseStateChange[stat];
 
-						//modify
-						foreach (ModifierUnit mod in activeMods)
-						{
-							val = ApplyModifierToValue(val, out clarityChange, mod);
-						}
+                        //modify
+                        foreach (ModifierUnit mod in activeMods)
+                        {
+                            val = ApplyModifierToValue(val, out clarityChange, mod);
+                        }
 
-						//apply
-						_lastPotionVals[stat].Value += val;
-						_lastPotionVals[stat].Clarity += clarityChange;
+                        //apply
+                        _lastPotionVals[stat].Value += val;
+                        _lastPotionVals[stat].Clarity += clarityChange;
 
 					}
 					//now, reduce mods
@@ -128,14 +156,14 @@ public partial class Potion : Node3D
                     ModifierUnit newMod = new ModifierUnit(step.Type.ModType);
 					newMod.Strength = step.Type.ModStrength;
 
-					//modify the modifier
-					foreach(ModifierUnit meta in activeMetaMods)
-					{
-						newMod.Strength = ApplyModifierToValue(val, out clarityChange, meta);
-					}
+                    //modify the modifier
+                    foreach (ModifierUnit meta in activeMetaMods)
+                    {
+                        newMod.Strength = ApplyModifierToValue(val, out clarityChange, meta);
+                    }
 
-					//apply or insert
-					activeMods.Add(newMod);
+                    //apply or insert
+                    activeMods.Add(newMod);
 
 					break;
 				case IngredientStage.METAMODIFIER:
@@ -153,14 +181,14 @@ public partial class Potion : Node3D
                     ModifierUnit newMeta = new ModifierUnit(step.Type.MetaModType);
 					newMeta.Strength = step.Type.MetaModStrength;
 
-					//add
-					activeMetaMods.Add(newMeta);
+                    //add
+                    activeMetaMods.Add(newMeta);
 
-					break;
-			}
+                    break;
+            }
 
-			//now, also check always. for now, always does not "use" modifiers at all - possible for them to but it's slightly more complex
-		}
+            //now, also check always. for now, always does not "use" modifiers at all - possible for them to but it's slightly more complex
+        }
 
 		//potion is valid and stats are done!
 		Validity = PotionValidity.VALID;
