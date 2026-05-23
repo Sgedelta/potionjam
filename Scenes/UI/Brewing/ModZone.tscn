@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dbgdk56yy8d40"]
+
+[ext_resource type="Script" uid="uid://d03eiq1p7fbty" path="res://Scenes/UI/Brewing/ModZone.cs" id="1_iihjs"]
+
+[node name="ModZone" type="Panel" unique_id=330743001]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iihjs")
+
+[node name="Label" type="Label" parent="." unique_id=992344225]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Mod"

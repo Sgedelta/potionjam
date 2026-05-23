@@ -9,7 +9,7 @@ public partial class GameManager : Node
 
     public override void _EnterTree()
     {
-        if(!IsInstanceValid(GameManager._instance))
+        if(!IsInstanceValid(_instance))
 		{
 			//other instance does not exist or has been deleted
 			_instance = this;
@@ -20,11 +20,11 @@ public partial class GameManager : Node
 			//another game manager exists, so we are deleting this one
 			Free();
 		}
-    }
+	}
 
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
 	{
 	}
 

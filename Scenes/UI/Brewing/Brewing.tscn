@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://qfwdunt6eprx"]
+
+[ext_resource type="Script" uid="uid://b4ltvwx5t8353" path="res://Scenes/UI/Brewing/Brewing.cs" id="1_miq85"]
+[ext_resource type="Script" uid="uid://dhei82fmg48d7" path="res://Scenes/UI/Brewing/CauldronUI.cs" id="2_ge038"]
+[ext_resource type="Script" uid="uid://cccbcj6sooh8j" path="res://Scenes/UI/Brewing/PotionBar.cs" id="2_kn5bl"]
+[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Ingredients/Ingredient.cs" id="2_s5517"]
+[ext_resource type="Script" uid="uid://byfndjxt11p5h" path="res://Scenes/UI/Brewing/BackpackGrid.cs" id="2_xflou"]
+[ext_resource type="Resource" uid="uid://7lka44tvg884" path="res://Resources/Ingredients/EyeOfNewt.tres" id="3_67v85"]
+[ext_resource type="Resource" uid="uid://bmkqqbi2dgph5" path="res://Resources/Ingredients/restOfNewt.tres" id="4_g4ofs"]
+[ext_resource type="Script" uid="uid://djlk4ktpnkifp" path="res://Scenes/UI/Brewing/ToolsPanel.cs" id="4_kdjyo"]
+[ext_resource type="PackedScene" uid="uid://is6u2xvq6d87" path="res://Scenes/UI/Brewing/IngredientSlot.tscn" id="4_uokye"]
+[ext_resource type="PackedScene" uid="uid://dbgdk56yy8d40" path="res://Scenes/UI/Brewing/ModZone.tscn" id="5_s5btl"]
+[ext_resource type="Script" uid="uid://bci7ijoxepm6d" path="res://Scenes/UI/Brewing/ConfirmPotion.cs" id="6_044p6"]
+[ext_resource type="Script" uid="uid://clt2bkvyxq73n" path="res://Scenes/UI/Brewing/Cauldron.cs" id="8_s827p"]
+[ext_resource type="Texture2D" uid="uid://ki55t873ma7c" path="res://icon.svg" id="10_67v85"]
+
+[node name="Brewing" type="Control" unique_id=1455456260]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_miq85")
+AllIngredients = Array[ExtResource("2_s5517")]([ExtResource("3_67v85"), ExtResource("4_g4ofs")])
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=690588636]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PotionBar" type="HBoxContainer" parent="VBox" unique_id=71309780]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("2_kn5bl")
+
+[node name="Label" type="Label" parent="VBox/PotionBar" unique_id=874360205]
+layout_mode = 2
+text = "Potions"
+
+[node name="BrewingArea" type="HBoxContainer" parent="VBox" unique_id=526790651]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Backpack" type="VBoxContainer" parent="VBox/BrewingArea" unique_id=1362982157]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_xflou")
+IngredientSlotScene = ExtResource("4_uokye")
+
+[node name="BackpackLabel" type="Label" parent="VBox/BrewingArea/Backpack" unique_id=1977359898]
+layout_mode = 2
+text = "Backpack"
+
+[node name="BackpackGrid" type="GridContainer" parent="VBox/BrewingArea/Backpack" unique_id=861177606]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="CauldronUI" type="Panel" parent="VBox/BrewingArea" unique_id=1432966558]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_ge038")
+
+[node name="IngredientStrip" type="HBoxContainer" parent="VBox/BrewingArea/CauldronUI" unique_id=1720902447]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 80.0
+offset_right = 365.0
+offset_bottom = 120.0
+
+[node name="HoverLabel" type="Label" parent="VBox/BrewingArea/CauldronUI" unique_id=1050797535]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 195.0
+offset_right = 343.0
+offset_bottom = 282.0
+
+[node name="Cauldron" type="Panel" parent="VBox/BrewingArea/CauldronUI" unique_id=1372912025]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 200.0
+offset_right = 306.0
+offset_bottom = 391.0
+script = ExtResource("8_s827p")
+
+[node name="FlushButton" type="Button" parent="VBox/BrewingArea/CauldronUI" unique_id=238876159]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 447.0
+offset_right = 360.0
+offset_bottom = 478.0
+text = "Flush"
+
+[node name="Tools" type="VBoxContainer" parent="VBox/BrewingArea" unique_id=1276690065]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+script = ExtResource("4_kdjyo")
+
+[node name="ToolLabel" type="Label" parent="VBox/BrewingArea/Tools" unique_id=1011832168]
+layout_mode = 2
+text = "Tools"
+
+[node name="ModZone" parent="VBox/BrewingArea/Tools" unique_id=330743001 instance=ExtResource("5_s5btl")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MetaModZone" parent="VBox/BrewingArea/Tools" unique_id=1869294421 instance=ExtResource("5_s5btl")]
+layout_mode = 2
+size_flags_vertical = 3
+ZoneStage = 2
+
+[node name="ConfirmPotion" type="TextureButton" parent="VBox" unique_id=662397611]
+layout_mode = 2
+texture_normal = ExtResource("10_67v85")
+texture_pressed = ExtResource("10_67v85")
+texture_hover = ExtResource("10_67v85")
+texture_disabled = ExtResource("10_67v85")
+texture_focused = ExtResource("10_67v85")
+script = ExtResource("6_044p6")
