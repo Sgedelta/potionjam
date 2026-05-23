@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://l4unyj3u1tsy"]
+
+[ext_resource type="Script" uid="uid://dty30h5togduo" path="res://Scenes/Globals/DialogueManager.cs" id="1_knoe8"]
+[ext_resource type="Script" uid="uid://budnld4qd513n" path="res://addons/YarnSpinner-Godot/Runtime/DialogueRunner.cs" id="2_01bdl"]
+[ext_resource type="Resource" uid="uid://ctbbgnyto6ycd" path="res://Resources/Dialogue/Dialogue.yarnproject" id="3_k3qtx"]
+[ext_resource type="Script" uid="uid://b8nsxur6opm4k" path="res://addons/YarnSpinner-Godot/Runtime/Async/LinePresenter.cs" id="4_jjsos"]
+[ext_resource type="Script" uid="uid://cm822dsbyq7mj" path="res://addons/YarnSpinner-Godot/Runtime/Async/LinePresenterButtonHandler.cs" id="5_w3uf8"]
+[ext_resource type="Script" uid="uid://ba6k2ox6e4qg" path="res://addons/YarnSpinner-Godot/Runtime/Async/OptionsPresenter.cs" id="6_ejaxl"]
+[ext_resource type="PackedScene" uid="uid://cke1o30c8hixf" path="res://Scenes/UI/dialogue_option.tscn" id="7_ontvw"]
+[ext_resource type="Script" uid="uid://c5gxawri864uf" path="res://addons/YarnSpinner-Godot/Runtime/LineProviders/TextLineProvider.cs" id="8_lwqgb"]
+
+[node name="DialogueManager" type="Node" unique_id=246227679]
+script = ExtResource("1_knoe8")
+
+[node name="DialogueRunner" type="Node" parent="." unique_id=257986089 node_paths=PackedStringArray("lineProvider", "dialoguePresenters")]
+script = ExtResource("2_01bdl")
+yarnProject = ExtResource("3_k3qtx")
+lineProvider = NodePath("../TextLineProvider")
+dialoguePresenters = [NodePath("../DialogueCanvasLayer/LinePresenter"), NodePath("../DialogueCanvasLayer/OptionsPresenter")]
+metadata/_custom_type_script = "uid://budnld4qd513n"
+
+[node name="DialogueCanvasLayer" type="CanvasLayer" parent="." unique_id=319036180]
+
+[node name="LinePresenter" type="Node" parent="DialogueCanvasLayer" unique_id=201391852 node_paths=PackedStringArray("dialogueRunner", "presenterControl", "lineText", "characterNameText", "characterNameContainer", "eventHandlers")]
+script = ExtResource("4_jjsos")
+dialogueRunner = NodePath("../../DialogueRunner")
+presenterControl = NodePath("PresenterControl")
+lineText = NodePath("PresenterControl/VBoxContainer/LineText")
+characterNameText = NodePath("PresenterControl/VBoxContainer/CharacterNameText")
+characterNameContainer = NodePath("PresenterControl/VBoxContainer/CharacterNameText")
+eventHandlers = [NodePath("LinePresenterButtonHandler")]
+metadata/_custom_type_script = "uid://b8nsxur6opm4k"
+
+[node name="PresenterControl" type="Control" parent="DialogueCanvasLayer/LinePresenter" unique_id=364323496]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueCanvasLayer/LinePresenter/PresenterControl" unique_id=695773183]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterNameText" type="RichTextLabel" parent="DialogueCanvasLayer/LinePresenter/PresenterControl/VBoxContainer" unique_id=589803172]
+layout_mode = 2
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="LineText" type="RichTextLabel" parent="DialogueCanvasLayer/LinePresenter/PresenterControl/VBoxContainer" unique_id=1462891108]
+layout_mode = 2
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="DialogueCanvasLayer/LinePresenter/PresenterControl/VBoxContainer" unique_id=1828271962]
+layout_mode = 2
+text = "Continue"
+
+[node name="LinePresenterButtonHandler" type="Node" parent="DialogueCanvasLayer/LinePresenter" unique_id=926192257 node_paths=PackedStringArray("continueButton", "dialogueRunner")]
+script = ExtResource("5_w3uf8")
+continueButton = NodePath("../PresenterControl/VBoxContainer/ContinueButton")
+dialogueRunner = NodePath("../../../DialogueRunner")
+
+[node name="OptionsPresenter" type="Node" parent="DialogueCanvasLayer" unique_id=516447217 node_paths=PackedStringArray("presenterControl", "lastLineText", "lastLineContainer", "lastLineCharacterNameText", "lastLineCharacterNameContainer", "optionParent")]
+script = ExtResource("6_ejaxl")
+presenterControl = NodePath("PresenterControl")
+optionItemPrefab = ExtResource("7_ontvw")
+showsLastLine = true
+lastLineText = NodePath("PresenterControl/VBoxContainer/PrevLineText")
+lastLineContainer = NodePath("PresenterControl/VBoxContainer")
+lastLineCharacterNameText = NodePath("PresenterControl/VBoxContainer/PrevCharacterNameText")
+lastLineCharacterNameContainer = NodePath("PresenterControl/VBoxContainer")
+optionParent = NodePath("PresenterControl/VBoxContainer")
+metadata/_custom_type_script = "uid://ba6k2ox6e4qg"
+
+[node name="PresenterControl" type="Control" parent="DialogueCanvasLayer/OptionsPresenter" unique_id=320006647]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueCanvasLayer/OptionsPresenter/PresenterControl" unique_id=1840604024]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PrevCharacterNameText" type="RichTextLabel" parent="DialogueCanvasLayer/OptionsPresenter/PresenterControl/VBoxContainer" unique_id=1271226422]
+layout_mode = 2
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="PrevLineText" type="RichTextLabel" parent="DialogueCanvasLayer/OptionsPresenter/PresenterControl/VBoxContainer" unique_id=1201185027]
+layout_mode = 2
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextLineProvider" type="Node" parent="." unique_id=505176345]
+script = ExtResource("8_lwqgb")
+metadata/_custom_type_script = "uid://c5gxawri864uf"

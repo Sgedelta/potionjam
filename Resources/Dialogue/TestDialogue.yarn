@@ -1,0 +1,11 @@
+﻿title: TestDialogue
+tags:
+---
+Game: This is a test of the dialogue system!
+Game: Choose an option:
+-> Player: Option 1
+    Game: You chose option 1!
+-> Player: Option 2
+    Game: You chose option 2!
+Game: This concludes the dialogue test.
+===

@@ -1,8 +1,24 @@
+#nullable enable
 using Godot;
 using System;
 
 public partial class Character : CharacterBody3D
 {
+	//The NPC which the character will talk to upon pressing the interact key
+	//Set by NPCs when the character enters or exits their range
+	//Null for no interaction (i.e. no NPCs in range)
+	private NPC? _queuedInteraction = null;
+	
+	//Sets which NPC the player character will talk to when interacting
+	public void SetInteraction(NPC interaction) {
+		_queuedInteraction = interaction;
+	}
+	
+	//Clears the NPC the player character will talk to when interacting
+	public void ClearInteraction() {
+		_queuedInteraction = null;
+	}
+	
 	//godot presupplied 3D movement:
 
 	public const float Speed = 5.0f;
