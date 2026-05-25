@@ -424,7 +424,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8017162, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1860657436]
 transform = Transform3D(0.8480481, 0.26495963, -0.45892355, 0, 0.8660254, 0.5, 0.52991927, -0.42402405, 0.73443115, 0, 0, 0)
 shadow_enabled = true
-shadow_opacity = 0.83
 
 [node name="Meshes" type="Node" parent="." unique_id=1346005141]
 
@@ -749,6 +748,26 @@ mesh = SubResource("BoxMesh_bagdo")
 visible = false
 shape = SubResource("ConvexPolygonShape3D_vn8ml")
 
+[node name="Building11" type="StaticBody3D" parent="Meshes/TownSquareSector" unique_id=508291445]
+transform = Transform3D(1, 0, 6.993822e-07, 0, 1, 0, -6.993822e-07, 0, 1, -68.6054, -1.18, 24.406534)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/TownSquareSector/Building11" unique_id=583528073]
+mesh = SubResource("BoxMesh_7ejik")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Meshes/TownSquareSector/Building11" unique_id=1819270836]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_p2du1")
+
+[node name="Building12" type="StaticBody3D" parent="Meshes/TownSquareSector" unique_id=745151152]
+transform = Transform3D(1, 0, 1.3987644e-06, 0, 1, 0, -1.3987644e-06, 0, 1, -85.424, -1.18, 30.565)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/TownSquareSector/Building12" unique_id=1778006581]
+mesh = SubResource("BoxMesh_7ejik")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Meshes/TownSquareSector/Building12" unique_id=835441179]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_p2du1")
+
 [node name="ResidentialSector" type="Node" parent="Meshes" unique_id=1970708525]
 
 [node name="ResidentialSectorFloor" type="StaticBody3D" parent="Meshes/ResidentialSector" unique_id=640345216]
@@ -817,7 +836,7 @@ visible = false
 shape = SubResource("ConvexPolygonShape3D_ap4me")
 
 [node name="FrankBuilding" type="StaticBody3D" parent="Meshes/ResidentialSector" unique_id=188255880]
-transform = Transform3D(1, 0, 6.993822e-07, 0, 1, 0, -6.993822e-07, 0, 1, -88.29, -1.2, 47.358456)
+transform = Transform3D(1, 0, 6.993822e-07, 0, 1, 0, -6.993822e-07, 0, 1, -88.29, -1.2, 49.293507)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/ResidentialSector/FrankBuilding" unique_id=1197723695]
 mesh = SubResource("BoxMesh_7ejik")
