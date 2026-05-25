@@ -1,22 +1,25 @@
 #nullable enable
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Character : CharacterBody3D
 {
-	//The NPC which the character will talk to upon pressing the interact key
-	//Set by NPCs when the character enters or exits their range
+	//The NPCs the character is in range of
+	//Changed by NPCs when the character enters or exits their range
 	//Null for no interaction (i.e. no NPCs in range)
-	private NPC? _queuedInteraction = null;
+	private List<NPC> _queuedInteractions = new List<NPC>();
 	
 	//Sets which NPC the player character will talk to when interacting
-	public void SetInteraction(NPC interaction) {
-		_queuedInteraction = interaction;
+	public void AddInteraction(NPC interaction) {
+		if (!_queuedInteractions.Contains(interaction)) {
+			_queuedInteractions.Add(interaction);
+		}
 	}
 	
 	//Clears the NPC the player character will talk to when interacting
-	public void ClearInteraction() {
-		_queuedInteraction = null;
+	public void RemoveInteraction(NPC interaction) {
+		_queuedInteractions.Remove(interaction);
 	}
 	
 	//godot presupplied 3D movement:
@@ -37,13 +40,23 @@ public partial class Character : CharacterBody3D
 		// Handle Jump.
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
 		{
-			if (_queuedInteraction == null) {
+			if (_queuedInteractions.Count == 0) {
 				velocity.Y = JumpVelocity;
 			}
 			else {
+				//Get the closest NPC to the player out of those stored in _queuedInteractions
+				NPC closestInteraction = _queuedInteractions[0];
+				float closestDistance = float.MaxValue;
+				foreach (NPC interaction in _queuedInteractions) {
+					float distance = (interaction.GlobalPosition - this.GlobalPosition).Length();
+					if (distance < closestDistance) {
+						closestInteraction = interaction;
+						closestDistance = distance;
+					}
+				}
 				//TODO: Disable/enable character control before/after the dialogue runs
 				//Can't be done yet since updated character movement isn't merged
-				string dialogueTitle = _queuedInteraction.GetDialogueTitle();
+				string dialogueTitle = closestInteraction.GetDialogueTitle();
 				DialogueManager._instance.GetDialogueRunner().StartDialogue(dialogueTitle);
 			}
 		}
