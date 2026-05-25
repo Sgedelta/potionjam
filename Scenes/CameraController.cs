@@ -31,11 +31,15 @@ public partial class CameraController : Node3D
 
 	private Camera3D _camera;
 
+    public Vector3 CamDesiredOffset { get { return _camera.Position * Transform.Basis; } }
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _camera = GetNode<Camera3D>("Camera");
+
+        GameManager._instance.CC = this;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -120,25 +124,6 @@ public partial class CameraController : Node3D
 	{
 		switch(_facing)
 		{
-			case Direction.North:
-				Facing = Direction.East;
-				break;
-            case Direction.East:
-                Facing = Direction.South;
-                break;
-            case Direction.South:
-                Facing = Direction.West;
-                break;
-            case Direction.West:
-                Facing = Direction.North;
-                break;
-        }
-	}
-
-	public void RotRight()
-	{
-        switch (_facing)
-        {
             case Direction.North:
                 Facing = Direction.West;
                 break;
@@ -149,6 +134,25 @@ public partial class CameraController : Node3D
                 Facing = Direction.East;
                 break;
             case Direction.East:
+                Facing = Direction.North;
+                break;
+        }
+	}
+
+	public void RotRight()
+	{
+        switch (_facing)
+        {
+            case Direction.North:
+                Facing = Direction.East;
+                break;
+            case Direction.East:
+                Facing = Direction.South;
+                break;
+            case Direction.South:
+                Facing = Direction.West;
+                break;
+            case Direction.West:
                 Facing = Direction.North;
                 break;
         }

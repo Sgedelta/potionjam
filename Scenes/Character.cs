@@ -51,6 +51,15 @@ public partial class Character : CharacterBody3D
 				velocity.Y = JumpVelocity;
 			}
 
+			//point toward the current camera so that the Transform.Basis is correct
+			if(IsInstanceValid(GameManager._instance.CC))
+			{
+				Transform = Transform.LookingAt(
+					Position + //our position, plus
+                    (GameManager._instance.CC.CamDesiredOffset * new Vector3(1, 0, -1)) //the camera's current offset from desired position
+					);
+			}
+
 			// Get the input direction and handle the movement/deceleration.
 			Vector2 inputDir = Input.GetVector("movement_left", "movement_right", "movement_up", "movement_down");
 			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();

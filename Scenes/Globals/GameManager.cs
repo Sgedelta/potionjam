@@ -22,6 +22,8 @@ public partial class GameManager : Node
 		}
 	}
 
+	public CameraController CC; //temporary - should probably be moved to a "Main Game" or similar. oh well!
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
