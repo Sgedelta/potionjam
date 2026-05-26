@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dkjng5ooa1rsh"]
 
+[ext_resource type="PackedScene" uid="uid://l4unyj3u1tsy" path="res://Scenes/Globals/dialogue_manager.tscn" id="1_mq1bj"]
 [ext_resource type="PackedScene" uid="uid://ddx01vixwd17l" path="res://Scenes/character.tscn" id="1_skmq4"]
 [ext_resource type="PackedScene" uid="uid://ciqk568b1xmu3" path="res://Scenes/main_camera.tscn" id="2_au00k"]
+[ext_resource type="PackedScene" uid="uid://bavneyoya3i1g" path="res://Scenes/npc.tscn" id="3_iwv7r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bwha0"]
 size = Vector3(10, 1, 10)
@@ -11,8 +13,13 @@ size = Vector3(10, 1, 10)
 
 [node name="TestWorld" type="Node3D" unique_id=2104044446]
 
+[node name="DialogueManager" parent="." unique_id=246227679 instance=ExtResource("1_mq1bj")]
+
 [node name="Character" parent="." unique_id=406720183 instance=ExtResource("1_skmq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8017162, 0)
+
+[node name="NPC" parent="." unique_id=610659534 instance=ExtResource("3_iwv7r")]
+_dialogueTitle = "TestDialogue"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1752568330]
 transform = Transform3D(1, 0, 0, 0, 0.8603064, 0.5097773, 0, -0.5097773, 0.8603064, 0, 0, 0)
