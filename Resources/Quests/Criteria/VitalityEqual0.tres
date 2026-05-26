@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EqualCriterion" format=3 uid="uid://b25m26dma3c3v"]
+
+[ext_resource type="Script" uid="uid://carjsecsqtl6k" path="res://Resources/Quests/Criteria/EqualCriterion.cs" id="1_uyu8w"]
+
+[resource]
+script = ExtResource("1_uyu8w")
+StatToCheck = 2
+metadata/_custom_type_script = "uid://carjsecsqtl6k"

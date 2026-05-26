@@ -68,6 +68,23 @@ public partial class Character : CharacterBody3D
 					}
 					SetControlsEnabled(false);
 					string dialogueTitle = closestInteraction.GetDialogueTitle();
+					
+					/* Test case for quests
+					Potion testPotion = new Potion();
+					Ingredient testIngredient = GD.Load<Ingredient>("res://Resources/Ingredients/QuestTestIngredient.tres");
+					PotionStep testStep1 = new PotionStep();
+					testStep1.Type = testIngredient;
+					testStep1.Stage = IngredientStage.BASE;
+					testPotion.AddStep(testStep1);
+					PotionStep testStep2 = new PotionStep();
+					testStep2.Type = testIngredient;
+					testStep2.Stage = IngredientStage.MODIFIER;
+					testPotion.AddStep(testStep2);
+					testPotion.GetPotionValues(); //necessary (at least in this test case) to properly compute flavor
+					
+					closestInteraction.GivePotion(testPotion); //This line gives the potion to the NPC so that the dialogue system can consider the potion.
+					*/
+					
   					DialogueRunner dr = DialogueManager._instance.GetDialogueRunner();
 					dr.StartDialogue(dialogueTitle);
   					dr.onDialogueComplete += () => {SetControlsEnabled(true);}; //Note, might need to "remove" this from the dr or it'll slowly stack up..? Not critical atm, but to think about

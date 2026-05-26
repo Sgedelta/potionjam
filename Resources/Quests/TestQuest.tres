@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://bqr0ckbftothn"]
+
+[ext_resource type="Script" uid="uid://byfuipwqqlodu" path="res://Resources/Quests/Criteria/BaseCriterion.cs" id="1_2jijj"]
+[ext_resource type="Script" uid="uid://834y15i83wnr" path="res://Resources/Quests/Quest.cs" id="1_o8b1s"]
+[ext_resource type="Resource" uid="uid://ddt8ot2sarymi" path="res://Resources/Quests/Criteria/FlavorBelow0.tres" id="2_p11a1"]
+[ext_resource type="Resource" uid="uid://f2tnddn0ho53" path="res://Resources/Quests/Criteria/VisionBetween5And10.tres" id="3_qjwm1"]
+[ext_resource type="Resource" uid="uid://dyroniojmb1wv" path="res://Resources/Quests/Criteria/VisionClarityAbove0.tres" id="4_66p66"]
+[ext_resource type="Resource" uid="uid://b25m26dma3c3v" path="res://Resources/Quests/Criteria/VitalityEqual0.tres" id="5_t6dbb"]
+
+[resource]
+script = ExtResource("1_o8b1s")
+Name = "TestQuest"
+Criteria = Array[ExtResource("1_2jijj")]([ExtResource("2_p11a1"), ExtResource("3_qjwm1"), ExtResource("4_66p66"), ExtResource("5_t6dbb")])
+metadata/_custom_type_script = "uid://834y15i83wnr"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WithinRangeCriterion" format=3 uid="uid://f2tnddn0ho53"]
+
+[ext_resource type="Script" uid="uid://2roh3w6i55uv" path="res://Resources/Quests/Criteria/WithinRangeCriterion.cs" id="1_kuk8n"]
+
+[resource]
+script = ExtResource("1_kuk8n")
+MinValue = 5.0
+MaxValue = 10.0
+StatToCheck = 1
+metadata/_custom_type_script = "uid://2roh3w6i55uv"

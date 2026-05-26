@@ -9,3 +9,17 @@ Game: Choose an option:
     Game: You chose option 2!
 Game: This concludes the dialogue test.
 ===
+
+title: QuestSample
+tags:
+---
+Game: This is an example of checking for quest completion!
+
+//The function to check for a quest is always CheckQuest and an underscore followed by the quest's name.
+//Quest name is set under each quest resource in the Godot inspector.
+<<if CheckQuest_TestQuest() == true>>
+    Game: Quest completed!
+<<else>>
+    Game: Quest failed!
+<<endif>>
+===

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://c6u0ox478d0e1"]
+
+[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Ingredients/Ingredient.cs" id="1_fv1r6"]
+
+[resource]
+script = ExtResource("1_fv1r6")
+BaseFlavor = -50.0
+BaseStateChange = Dictionary[int, float]({
+1: 6.0,
+2: 0.0,
+4: -5.0
+})
+ModFlavor = -50.0
+ModType = 1
+ModStrength = 1.0
+metadata/_custom_type_script = "uid://dl3eyc3dyxf08"

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LessThanCriterion" format=3 uid="uid://ddt8ot2sarymi"]
+
+[ext_resource type="Script" uid="uid://b8lms8uij7x0p" path="res://Resources/Quests/Criteria/LessThanCriterion.cs" id="1_j6h5c"]
+
+[resource]
+script = ExtResource("1_j6h5c")
+MaxInclusive = false
+metadata/_custom_type_script = "uid://b8lms8uij7x0p"

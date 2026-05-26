@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GreaterThanCriterion" format=3 uid="uid://dyroniojmb1wv"]
+
+[ext_resource type="Script" uid="uid://cbd2dtew84ful" path="res://Resources/Quests/Criteria/GreaterThanCriterion.cs" id="1_tfr7o"]
+
+[resource]
+script = ExtResource("1_tfr7o")
+MinInclusive = false
+StatToCheck = 1
+CheckClarity = true
+metadata/_custom_type_script = "uid://cbd2dtew84ful"
