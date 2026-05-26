@@ -14,13 +14,13 @@ public partial class NPC : Node3D
 	
 	public void OnRangeEntered(Node3D other) {
 		if (other is Character) {
-			((Character)other).SetInteraction(this);
+			((Character)other).AddInteraction(this);
 		}
 	}
 	
 	public void OnRangeExited(Node3D other) {
 		if (other is Character) {
-			((Character)other).ClearInteraction();
+			((Character)other).RemoveInteraction(this);
 		}
 	}
 }
