@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://5mckfmbp1g1s"]
+
+[ext_resource type="Shader" uid="uid://7t1gwtalfvap" path="res://Resources/Shaders/PotionShader.gdshader" id="1_3yh11"]
+[ext_resource type="Texture2D" uid="uid://ki55t873ma7c" path="res://icon.svg" id="2_iwc1s"]
+
+[sub_resource type="Gradient" id="Gradient_m5vy5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.25, 0.5, 0.7, 0.95)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_360y5"]
+noise_type = 0
+fractal_weighted_strength = 0.4
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 16.5
+domain_warp_frequency = 0.04
+domain_warp_fractal_octaves = 1
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_m5vy5"]
+width = 256
+height = 256
+depth = 128
+noise = SubResource("FastNoiseLite_360y5")
+color_ramp = SubResource("Gradient_m5vy5")
+seamless = true
+seamless_blend_skirt = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t20f"]
+resource_local_to_scene = true
+shader = ExtResource("1_3yh11")
+shader_parameter/noise_tex = SubResource("NoiseTexture3D_m5vy5")
+shader_parameter/anim_vel = Vector3(0.05, -0.025, 0.05)
+shader_parameter/top_val = Color(1, 1, 0, 1)
+shader_parameter/mid_val = Color(0.78, 0, 0.39, 1)
+shader_parameter/low_val = Color(0, 0.5176471, 0, 1)
+
+[node name="PotionDisplay" type="Sprite2D" unique_id=1660507419]
+material = SubResource("ShaderMaterial_0t20f")
+texture = ExtResource("2_iwc1s")

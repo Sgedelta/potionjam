@@ -41,11 +41,17 @@ public partial class Ingredient : Resource
 /// </summary>
 public enum PotionStats
 {
-	Flavor,
-	Vision,
-	Vitality,
-	Energy,
-	Charm
+    Flavor,
+    Vision,
+    Vitality,
+    Energy,
+    Charm,
+    Bravery,
+    Age,
+    Goodness,
+    Weight,
+
+    NONE = 1000 //used to display a potion with no "highest influence" stat.
 }
 
 /// <summary>

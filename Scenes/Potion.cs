@@ -32,6 +32,10 @@ public partial class Potion : Node3D
 	private float _flavor = 0;
 	public float Flavor { get { return _flavor; } }
 
+	[Export] public PotionThemes Theme;
+	[Export] public Array<ShaderMaterial> PotShaders = new Array<ShaderMaterial>();
+
+
 	public Dictionary<PotionStats, StatUnit> GetPotionValues()
 	{
         //return old info if nothing has changed
@@ -193,6 +197,15 @@ public partial class Potion : Node3D
 		//potion is valid and stats are done!
 		_validity = PotionValidity.VALID;
 		_isDirty = false;
+
+
+        //now, before we leave, update any of the shaders that we need to with the appropriate values...
+        if (PotShaders.Count > 0)
+		{
+            UpdateThemeValues();
+        }
+
+
 		return;
 
 	}
@@ -223,6 +236,114 @@ public partial class Potion : Node3D
 
 		return val;
 	}
+
+	private void UpdateThemeValues()
+	{
+        StatUnit topStat = new StatUnit(PotionStats.NONE);
+        StatUnit midStat = new StatUnit(PotionStats.NONE);
+        StatUnit lowStat = new StatUnit(PotionStats.NONE);
+
+        float top = 0;
+        float mid = 0;
+        float low = 0;
+
+        Color topCol;
+        Color midCol;
+        Color lowCol;
+
+        Vector4 topVec;
+        Vector4 midVec;
+        Vector4 lowVec;
+
+        //first identify the top 3 stats
+        foreach (StatUnit unit in _lastPotionVals.Values)
+        {
+            //we are determining "influence" by simply counting the max abs val of stat change
+            float influence = Mathf.Abs(unit.Value);
+
+            //you *could* write this logic once using pointers. fuck that!
+            if (influence > top)
+            {
+                //low is the old mid (old low is "discarded")
+                lowStat = midStat;
+                low = mid;
+                //mid is the old top
+                midStat = topStat;
+                mid = top;
+                //and top is the new unit
+                topStat = unit;
+                top = influence;
+            }
+            else if (influence > mid)
+            {
+                //low is the old mid (old low is "discarded")
+                lowStat = midStat;
+                low = mid;
+                //mid is the new unit
+                midStat = unit;
+                mid = influence;
+            }
+            else if (influence > low)
+            {
+                //low is the new unit (old low is "discarded")
+                lowStat = unit;
+                low = influence;
+            }
+        }
+
+
+
+        //then, get their colors
+        if (low == 0)
+        {
+            //if low is still 0, there is no lowest value, so we either need to send just one color, or mid as low, and a blend as mid
+            if (mid == 0)
+            {
+                //if there is no top, send NONE's value for all three
+                if (top == 0)
+                {
+                    topCol = Theme.GetStatColor(new StatUnit(PotionStats.NONE));
+                    midCol = topCol;
+                    lowCol = topCol;
+                }
+                else //otherwise, send top's value for all three
+                {
+                    topCol = Theme.GetStatColor(topStat);
+                    midCol = topCol;
+                    lowCol = topCol;
+                }
+
+            }
+            else
+            {
+                //we have a top and a mid, but no low. Get the top and mid, and send top as top, low as mid, and mid as a blend of top and mid
+                topCol = Theme.GetStatColor(topStat);
+                lowCol = Theme.GetStatColor(midStat);
+                midCol = topCol.Blend(lowCol);
+            }
+        }
+        else
+        {
+            //we have top, middle, and low values. send them
+            topCol = Theme.GetStatColor(topStat);
+            midCol = Theme.GetStatColor(midStat);
+            lowCol = Theme.GetStatColor(lowStat);
+        }
+
+        //then, turn each color into a vector4
+        topVec = new Vector4(topCol.R, topCol.G, topCol.B, topCol.A);
+        midVec = new Vector4(midCol.R, midCol.G, midCol.B, midCol.A);
+        lowVec = new Vector4(lowCol.R, lowCol.G, lowCol.B, lowCol.A);
+
+        //then, send those vectors to the shader
+        foreach (ShaderMaterial s in PotShaders)
+        {
+            s.SetShaderParameter("top_val", topVec);
+            s.SetShaderParameter("mid_val", midVec);
+            s.SetShaderParameter("low_val", lowVec);
+
+        }
+    }
 
 
 	public void AddStep(PotionStep newStep)

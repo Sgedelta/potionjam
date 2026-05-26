@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bgq7kpv4qxc0w" path="res://Resources/Sprites/TEMP/PaperMario.png" id="1_ncmoq"]
 [ext_resource type="Texture2D" uid="uid://ki55t873ma7c" path="res://icon.svg" id="2_oujyw"]
-[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Ingredients/Ingredient.cs" id="3_vubmv"]
+[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Potions/Ingredients/Ingredient.cs" id="3_vubmv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o26oc"]
 atlas = ExtResource("1_ncmoq")
