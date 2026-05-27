@@ -2,6 +2,8 @@ using Godot;
 
 public partial class IngredientSlot : Panel
 {
+	[Signal] public delegate void DragStartedEventHandler();
+
 	public Ingredient IngredientData;
 	public IngredientStage CurrentStage = IngredientStage.BASE;
 
@@ -79,9 +81,12 @@ public partial class IngredientSlot : Panel
 
 	public override Variant _GetDragData(Vector2 atPosition)
 	{
+		if (GetParent() is ModZone) return default;
 		if (IngredientData == null) return default;
 		if (_icon != null && !_icon.Visible) return default; // in cauldron, can't drag
 
+		EmitSignal(SignalName.DragStarted);
+		
 		var preview = new TextureRect
 		{
 			Texture = _icon?.Texture,

@@ -3,11 +3,18 @@ using Godot;
 public partial class ConfirmPotion : TextureButton
 {
 	private Tween _pulseTween;
+	private Control _overlay;
 
+	public override void _Ready()
+	{
+		_overlay = GetNode<Control>("TooltipDetector");
+	}
+	
 	public void SetReady(bool ready)
 	{
 		Disabled = !ready;
 		Modulate = ready ? Colors.White : new Color(0.5f, 0.5f, 0.5f);
+		_overlay.TooltipText = ready ? "" : "Potion is not valid";
 
 		_pulseTween?.Kill();
 
