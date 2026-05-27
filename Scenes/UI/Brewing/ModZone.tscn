@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dbgdk56yy8d40"]
 
 [ext_resource type="Script" uid="uid://d03eiq1p7fbty" path="res://Scenes/UI/Brewing/ModZone.cs" id="1_iihjs"]
+[ext_resource type="PackedScene" uid="uid://is6u2xvq6d87" path="res://Scenes/UI/Brewing/IngredientSlot.tscn" id="2_kmt1a"]
 
 [node name="ModZone" type="Panel" unique_id=330743001]
 anchors_preset = 15
@@ -15,3 +16,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Mod"
+
+[node name="IngredientSlot" parent="." unique_id=1581305987 instance=ExtResource("2_kmt1a")]
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+mouse_filter = 1

@@ -29,13 +29,13 @@ public partial class CauldronUI : Panel
 		_cauldron.MouseExited += () => _hoverLabel.Visible = false;
 	}
 
-	public void OnCauldronDrop(IngredientSlot slot)
+	public void OnCauldronDrop(Ingredient ingredient, IngredientStage stage)
 	{
-		if (slot?.IngredientData == null) return;
+		if (ingredient == null) return;
 
-		_steps.Add((slot.IngredientData, slot.CurrentStage));
+		_steps.Add((ingredient, stage));
 		RebuildStrip();
-		EmitSignal(SignalName.IngredientAdded, slot.IngredientData, (int)slot.CurrentStage);
+		EmitSignal(SignalName.IngredientAdded, ingredient, (int)stage);
 	}
 
 	public void SetHoverText(string text) => _hoverLabel.Text = text;

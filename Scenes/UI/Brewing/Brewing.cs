@@ -30,7 +30,6 @@ public partial class Brewing : Control
 		//signals
 		_cauldron.IngredientAdded += OnIngredientAddedToCauldron;
 		_cauldron.Flushed += OnCauldronFlushed;
-		_tools.StageAssigned += OnStageAssigned;
 		_confirmButton.Pressed += OnConfirmPressed;
 
 		RefreshConfirmButton();
@@ -39,8 +38,6 @@ public partial class Brewing : Control
 	private void OnIngredientAddedToCauldron(Ingredient ingredient, int stageInt)
 	{
 		var stage = (IngredientStage)stageInt;
-
-		_backpack.HideIngredient(ingredient); //not sure if we want this?
 
 		var step = new PotionStep { Type = ingredient, Stage = stage };
 		_currentPotion.AddStep(step);
@@ -58,35 +55,15 @@ public partial class Brewing : Control
 		RefreshConfirmButton();
 	}
 
-	// changing ingred to mod / metamod
-	private void OnStageAssigned(Ingredient ingredient, int newStageInt)
-	{
-		var newStage = (IngredientStage)newStageInt;
-
-		var slot = _backpack.GetSlot(ingredient);
-		if (slot == null) //replaces slot - do we want this?
-			_backpack.AddIngredient(ingredient, newStage);
-		else
-			_backpack.ShowIngredient(ingredient, newStage);
-	}
-
 	private void OnConfirmPressed()
 	{
 		_currentPotion.GetPotionValues();
 
-		if (_currentPotion.Validity != Potion.PotionValidity.VALID)
-		{
-			//show error somehow?
-			return;
-		}
-
+		if (_currentPotion.Validity != Potion.PotionValidity.VALID) return;
+		
 		_potionBar.AddPotion();
-
 		_currentPotion.FlushPotion();
 		_cauldron.ClearSilent();
-
-		foreach (var ingredient in AllIngredients)
-			_backpack.ShowIngredient(ingredient, IngredientStage.BASE);
 
 		UpdateHoverLabel();
 		RefreshConfirmButton();
@@ -120,7 +97,6 @@ public partial class Brewing : Control
 	{
 		_currentPotion.GetPotionValues();
 		bool ready = _currentPotion.Validity == Potion.PotionValidity.VALID;
-		_confirmButton.Disabled = !ready;
-		_confirmButton.Modulate = ready ? Colors.White : new Color(0.6f, 0.6f, 0.6f); //only need rn bc disabled texture is same as normal
+		_confirmButton.SetReady(ready);
 	}
 }
