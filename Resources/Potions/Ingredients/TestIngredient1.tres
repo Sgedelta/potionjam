@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://chrw4nf8h8vu1"]
+
+[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Potions/Ingredients/Ingredient.cs" id="1_oafuh"]
+
+[resource]
+script = ExtResource("1_oafuh")
+BaseStateChange = Dictionary[int, float]({
+2: 5.0,
+3: 15.0
+})
+ModType = 4
+ModStrength = 100.0
+metadata/_custom_type_script = "uid://dl3eyc3dyxf08"

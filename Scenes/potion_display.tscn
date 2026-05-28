@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://5mckfmbp1g1s"]
 
 [ext_resource type="Shader" uid="uid://7t1gwtalfvap" path="res://Resources/Shaders/PotionShader.gdshader" id="1_3yh11"]
+[ext_resource type="Script" uid="uid://bu6ojdungqbt7" path="res://Scenes/Potion.cs" id="1_iwc1s"]
+[ext_resource type="Resource" uid="uid://h0xkd8c5iww5" path="res://Resources/Potions/BasicPotionTheme.tres" id="2_3ylhx"]
 [ext_resource type="Texture2D" uid="uid://ki55t873ma7c" path="res://icon.svg" id="2_iwc1s"]
+[ext_resource type="Script" uid="uid://dl3eyc3dyxf08" path="res://Resources/Potions/Ingredients/Ingredient.cs" id="2_wwal6"]
+[ext_resource type="Resource" uid="uid://7lka44tvg884" path="res://Resources/Potions/Ingredients/EyeOfNewt.tres" id="3_0wn1j"]
+[ext_resource type="Resource" uid="uid://chrw4nf8h8vu1" path="res://Resources/Potions/Ingredients/TestIngredient1.tres" id="4_wwal6"]
 
 [sub_resource type="Gradient" id="Gradient_m5vy5"]
 interpolation_mode = 2
@@ -35,6 +40,14 @@ shader_parameter/top_val = Color(1, 1, 0, 1)
 shader_parameter/mid_val = Color(0.78, 0, 0.39, 1)
 shader_parameter/low_val = Color(0, 0.5176471, 0, 1)
 
-[node name="PotionDisplay" type="Sprite2D" unique_id=1660507419]
+[node name="PotionDisplay" type="Node" unique_id=685591914]
+script = ExtResource("1_iwc1s")
+DoDebugSteps = true
+_debugSteps = Array[ExtResource("2_wwal6")]([ExtResource("3_0wn1j"), ExtResource("4_wwal6")])
+_debugStages = Array[int]([0, 1])
+Theme = ExtResource("2_3ylhx")
+PotShaders = Array[ShaderMaterial]([SubResource("ShaderMaterial_0t20f")])
+
+[node name="2D_Display" type="Sprite2D" parent="." unique_id=1660507419]
 material = SubResource("ShaderMaterial_0t20f")
 texture = ExtResource("2_iwc1s")

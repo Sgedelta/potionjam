@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class Potion : Node3D
+public partial class Potion : Node
 {
 	public enum PotionValidity
 	{
@@ -17,6 +17,11 @@ public partial class Potion : Node3D
 
 	private Array<PotionStep> _steps = new Array<PotionStep>();
 	private bool _isDirty = true;
+    [ExportGroup("As Base")]
+    [Export(PropertyHint.GroupEnable, "")] private bool DoDebugSteps = false;
+    [Export] private Array<Ingredient> _debugSteps = new();
+    [Export] private Array<IngredientStage> _debugStages = new();
+    [ExportGroup("")]
 
     private PotionValidity _validity;
 	public PotionValidity Validity { get { 
@@ -36,7 +41,16 @@ public partial class Potion : Node3D
 	[Export] public Array<ShaderMaterial> PotShaders = new Array<ShaderMaterial>();
 
 
-	public Dictionary<PotionStats, StatUnit> GetPotionValues()
+    public override void _Ready()
+    {
+        //DEBUGS
+        for(int i = 0; i < _debugSteps.Count; i++) {
+            AddStep(new PotionStep(_debugSteps[i], _debugStages[i]));
+        }
+
+    }
+
+    public Dictionary<PotionStats, StatUnit> GetPotionValues()
 	{
         //return old info if nothing has changed
         if (!_isDirty)
